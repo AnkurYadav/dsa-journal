@@ -76,4 +76,5 @@ sol 2
 
 ## Gotcha
 
-Use hashmap to find the element in O(1), you used binary_search to find the element after sorting the array which was not required since index were changed after update
+- Use hashmap to find the element in O(1), you used binary_search to find the element after sorting the array which was not required since index were changed after update
+- Hashmap can be created in a single go since later number would also give result in its turn if prior one doesn't
