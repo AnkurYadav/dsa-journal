@@ -1,7 +1,7 @@
 # LC 271 - encode-and-decode-strings
 
 **Difficulty:** Medium
-**Pattern:** <e.g. sliding window, monotonic stack, two pointers>
+**Pattern:** string
 **Link:** https://leetcode.com/problems/encode-and-decode-strings
 
 ## Approach
