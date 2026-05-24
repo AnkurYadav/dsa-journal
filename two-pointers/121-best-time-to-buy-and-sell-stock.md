@@ -1,7 +1,7 @@
 # LC 121 - best-time-to-buy-and-sell-stock
 
 **Difficulty:** Easy
-**Pattern:** two pointers
+**Pattern:** two pointers, sliding window
 **Link:** https://leetcode.com/problems/best-time-to-buy-and-sell-stock
 
 ## Approach
