@@ -45,7 +45,7 @@ class Solution:
 ## Complexity
 
 - Time: O(n)
-- Space: O(n)
+- Space: O(1)
 
 ## Gotcha
 
