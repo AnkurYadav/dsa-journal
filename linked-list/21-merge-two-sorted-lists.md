@@ -2,7 +2,7 @@
 # LC 21 - merge-two-sorted-lists
 
 **Difficulty:** Easy
-**Pattern:** <e.g. sliding window, monotonic stack, two pointers>
+**Pattern:** linked lists
 **Link:** https://leetcode.com/problems/merge-two-sorted-lists
 
 ## Approach
