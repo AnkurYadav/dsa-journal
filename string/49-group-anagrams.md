@@ -32,6 +32,45 @@ class Solution:
         return result
 ```
 
+```java
+class Solution {
+    public List<List<String>> groupAnagrams(String[] strs) {
+        Map<String, List<String>> map = new HashMap<>();
+
+        for(String str: strs) {
+            String encodedStr = encodeString(str);
+            map.computeIfAbsent(encodedStr, k -> new ArrayList<>()).add(str);
+        }
+
+        List<List<String>> res = new ArrayList<>();
+        for(List<String> value : map.values()) {
+            res.add(value);
+        }
+
+        return res;
+    }
+
+    private String encodeString(String str) {
+        int[] charCount = new int[26];
+
+        for(int i = 0; i < str.length(); i++) {
+            int ch_i = str.charAt(i) - 97;
+            charCount[ch_i]++;
+        }
+
+        StringBuilder res = new StringBuilder("");
+        for(int i = 0; i < 26; i++){
+            if(charCount[i] > 0) {
+                res.append((char) (i+97));
+                res.append(charCount[i]);
+            }
+        }
+
+        return res.toString();
+    }
+}
+```
+
 ## Complexity
 
 - Time: O(n)
