@@ -49,6 +49,50 @@ class Solution:
 
 ```
 
+```java
+class Solution {
+    public int[] topKFrequent(int[] nums, int k) {
+        Map<Integer, Integer> frequencyMap = new HashMap<>();
+
+        for(int n: nums) {
+            int val = frequencyMap.computeIfAbsent(n, i -> 0);
+            frequencyMap.put(n, ++val);
+        }
+
+        PriorityQueue<FrequencyItem> maxHeap = new PriorityQueue<>(Comparator.comparingInt(FrequencyItem::getFrequency).reversed());
+
+        for(Map.Entry<Integer, Integer> entrySet: frequencyMap.entrySet()) {
+            maxHeap.offer(new FrequencyItem(entrySet.getKey(), entrySet.getValue()));
+        }
+
+        int[] res = new int[k];
+        for(int i = 0; i < k; i++) {
+            res[i] = maxHeap.poll().getNum();
+        }
+
+        return res;
+    }
+}
+
+class FrequencyItem {
+    private int num;
+    private int frequency;
+
+    public FrequencyItem(int num, int frequency) {
+        this.num = num;
+        this.frequency = frequency;
+    }
+
+    public int getNum() {
+        return this.num;
+    }
+
+    public int getFrequency() {
+        return this.frequency;
+    }
+}
+```
+
 ## Complexity
 
 - Time: O(nlogk)
