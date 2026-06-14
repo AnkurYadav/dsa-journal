@@ -42,6 +42,50 @@ class Solution:
         return True
 ```
 
+```java
+class Solution {
+    public boolean isAnagram(String s, String t) {
+        int length_s = s.length();
+        int length_t = t.length();
+
+        if(length_s != length_t) {
+            return false;
+        }
+
+        Map<Character, Integer> map = new HashMap<>();
+
+        for(int i = 0; i < length_s; i++) {
+            char c = s.charAt(i);
+            if(map.containsKey(c)) {
+                int val = map.get(c);
+                map.put(c, ++val);
+            }
+            else {
+                map.put(c, 1);
+            }
+        }
+
+        for(int i = 0; i < length_t; i++) {
+            char c = t.charAt(i);
+            if(map.containsKey(c)) {
+                int val = map.get(c);
+                if(val == 1) {
+                    map.remove(c);
+                }
+                else{
+                    map.put(c, --val);
+                }
+            }
+            else {
+                return false;
+            }
+        }
+        
+        return map.isEmpty();
+    }
+}
+```
+
 ## Complexity
 
 - Time: O(n)
