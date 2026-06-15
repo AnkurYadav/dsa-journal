@@ -45,6 +45,38 @@ class Solution:
         return False
 ```
 
+```java
+class Solution {
+    public boolean isPalindrome(String s) {
+        int i = 0;
+        int j = s.length() -1;
+
+        while(i < j) {
+            char c_i = s.charAt(i);
+            char c_j = s.charAt(j);
+
+            if(!Character.isLetterOrDigit(c_i)) {
+                i++;
+                continue;
+            }
+            if(!Character.isLetterOrDigit(c_j)) {
+                j--;
+                continue;
+            }
+
+            if(Character.toLowerCase(c_i) != Character.toLowerCase(c_j)) {
+                return false;
+            }
+
+            i++;
+            j--;
+        }
+
+        return true;
+    }
+}
+```
+
 ## Complexity
 
 - Time: O(n)
