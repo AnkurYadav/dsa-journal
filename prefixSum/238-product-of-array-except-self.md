@@ -27,6 +27,27 @@ class Solution:
         return answer
 ```
 
+```java
+class Solution {
+    public int[] productExceptSelf(int[] nums) {
+        int l = nums.length;
+        int[] res = new int[l];
+        res[l-1] = 1;
+        for(int i = 1; i < l; i++) {
+            res[l-1-i] = res[l-i] * nums[l-i];
+        }
+
+        int prefix_mult = 1;
+        for(int i = 0; i < l; i++) {
+            res[i] *= prefix_mult;
+            prefix_mult *= nums[i];
+        }
+
+        return res;
+    }
+}
+```
+
 ## Complexity
 
 - Time: O(n)
