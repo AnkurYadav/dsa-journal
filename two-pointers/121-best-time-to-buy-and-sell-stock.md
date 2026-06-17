@@ -30,6 +30,33 @@ class Solution:
         return max_diff
 ```
 
+```java
+class Solution {
+    public int maxProfit(int[] prices) {
+        int l = prices.length;
+        int i = 0;
+        int j = 1;
+        int maxProfit = 0;
+        while(i < j && j < l) {
+            if(prices[j] < prices[i]) {
+                i = j;
+                j++;
+                continue;
+            }
+
+            int profit = prices[j] - prices[i];
+            if(profit > maxProfit) {
+                maxProfit = profit;
+            }
+
+            j++;
+        }
+
+        return maxProfit;
+    }
+}
+```
+
 ## Complexity
 
 - Time: O(n)
