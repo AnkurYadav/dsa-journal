@@ -42,6 +42,47 @@ class Solution:
         return max_len
 ```
 
+```java
+class Solution {
+    public int lengthOfLongestSubstring(String s) {
+        Set<Character> set = new HashSet<>();
+
+        int i = 0;
+        int j = 0;
+
+        int l = s.length();
+        int longestLength = 0;
+
+        while(j < l) {
+            char ch_j = s.charAt(j);
+            if(set.contains(ch_j)) {
+                int currentLength = set.size();
+                if(currentLength > longestLength) {
+                    longestLength = currentLength;
+                }
+                char ch_i = s.charAt(i);
+                while(ch_i != ch_j) {
+                    set.remove(ch_i);
+                    ch_i = s.charAt(++i);
+                }
+                set.remove(ch_i);
+                i++;
+            }
+            
+            set.add(ch_j);
+            j++;
+        }
+
+        int currentLength = set.size();
+        if(currentLength > longestLength) {
+            longestLength = currentLength;
+        }
+
+        return longestLength;
+    }
+}
+```
+
 ## Complexity
 
 - Time: O(n)
