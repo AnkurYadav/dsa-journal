@@ -44,6 +44,55 @@ class MinStack:
 # param_4 = obj.getMin()
 ```
 
+```java
+class Node {
+    public int value;
+    public int minTillNow;
+
+    public Node(int value, int minTillNow) {
+        this.value = value;
+        this.minTillNow = minTillNow;
+    }
+}
+
+class MinStack {
+    private Deque<Node> stack;
+
+    public MinStack() {
+        this.stack = new ArrayDeque<>();
+    }
+    
+    public void push(int value) {
+        int minTillNow = value;
+        if(!this.stack.isEmpty()) {
+            minTillNow = Math.min(value, stack.peek().minTillNow);
+        }
+        this.stack.push(new Node(value, minTillNow));
+    }
+    
+    public void pop() {
+        this.stack.pop();
+    }
+    
+    public int top() {
+        return this.stack.peek().value;
+    }
+    
+    public int getMin() {
+        return this.stack.peek().minTillNow;
+    }
+}
+
+/**
+ * Your MinStack object will be instantiated and called as such:
+ * MinStack obj = new MinStack();
+ * obj.push(value);
+ * obj.pop();
+ * int param_3 = obj.top();
+ * int param_4 = obj.getMin();
+ */
+```
+
 ## Complexity
 
 - Time: O(1)
