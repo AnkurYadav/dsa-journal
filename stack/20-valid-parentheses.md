@@ -30,6 +30,36 @@ class Solution:
         return len(stack) == 0
 ```
 
+```java
+class Solution {
+    public boolean isValid(String s) {
+        Deque<Character> stack = new ArrayDeque<>();
+        int l = s.length();
+
+        for(int i = 0; i < l; i++) {
+            char ch = s.charAt(i);
+
+            if(ch == '(') {
+                stack.push(')');
+            }
+            else if(ch == '{') {
+                stack.push('}');
+            }
+            else if(ch == '[') {
+                stack.push(']');
+            }
+            else {
+                if(stack.isEmpty() || ch != stack.pop()) {
+                    return false;
+                }
+            }
+        }
+
+        return stack.isEmpty();
+    }
+}
+```
+
 ## Complexity
 
 - Time: O(n)
@@ -37,4 +67,4 @@ class Solution:
 
 ## Gotcha
 
-check for stack emptiness in loop also
+remember to check for stack emptiness in loop and after loop
