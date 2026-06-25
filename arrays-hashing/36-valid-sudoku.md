@@ -41,6 +41,33 @@ class Solution:
         return True
 ```
 
+```java
+class Solution {
+    public boolean isValidSudoku(char[][] board) {
+        Set<String> set = new HashSet<>();
+        
+        for(int i = 0; i < board.length; i++) {
+            for(int j = 0; j < board[i].length; j++) {
+                if(board[i][j] != '.') {
+                    String rowStr = "r"+i+board[i][j];
+                    String colStr = "c"+j+board[i][j];
+                    String boxStr = "b"+(i/3)+(j/3)+board[i][j];
+
+                    if(set.contains(rowStr) || set.contains(colStr) || set.contains(boxStr)) {
+                        return false;
+                    }
+
+                    set.add(rowStr);
+                    set.add(colStr);
+                    set.add(boxStr);
+                }
+            }
+        }
+        return true;
+    }
+}
+```
+
 ## Complexity
 
 - Time: O(n+m)
