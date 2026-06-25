@@ -1,4 +1,4 @@
-# LC <number> - <problem name>
+# LC 36 - valid-sudoku
 
 **Difficulty:** Medium
 **Pattern:** array, hashSet
