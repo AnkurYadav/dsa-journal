@@ -29,6 +29,33 @@ class Solution:
         return longest_sequence
 ```
 
+```java
+class Solution {
+    public int longestConsecutive(int[] nums) {
+        Set<Integer> set = new HashSet<>();
+        for(int n : nums) {
+            set.add(n);
+        }
+
+        int maxSequenceLength = 0;
+        for(int n : set) {
+            if(set.contains(n-1)){
+                continue;
+            }
+
+            int nextN = n + 1;
+            int sequenceLength = 1;
+            while(set.contains(nextN)) {
+                sequenceLength++;
+                nextN++;
+            }
+            maxSequenceLength = Math.max(maxSequenceLength, sequenceLength);
+        }
+        return maxSequenceLength;
+    }
+}
+```
+
 ## Complexity
 
 - Time: O(n)
