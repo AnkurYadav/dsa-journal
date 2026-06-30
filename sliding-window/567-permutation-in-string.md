@@ -50,10 +50,67 @@ class Solution:
         return True
 ```
 
+```java
+class Solution {
+    public boolean checkInclusion(String s1, String s2) {
+        int l_s1 = s1.length();
+        int l_s2 = s2.length();
+
+        Map<Character, Integer> map = new HashMap<>();
+        for(int i = 0; i < l_s1; i++) {
+            char ch = s1.charAt(i);
+            if(map.containsKey(ch)) {
+                map.put(ch, map.get(ch)+1);
+            }
+            else {
+                map.put(ch, 1);
+            }
+        }
+
+        int lo = 0;
+        int hi = 0;
+        while(lo <= hi && hi < l_s2) {
+            char ch_hi = s2.charAt(hi);
+            if(map.containsKey(ch_hi)) {
+                int count = map.get(ch_hi);
+                if(count == 1) {
+                    map.remove(ch_hi);
+                }
+                else {
+                    map.put(ch_hi, map.get(ch_hi)-1);
+                }
+                if(hi-lo+1 == l_s1){
+                    return true;
+                }
+                hi++;
+            }
+            else{
+                if(hi == lo) {
+                    hi++;
+                    lo++;
+                    continue;
+                }
+
+                char ch_lo = s2.charAt(lo);
+                if(map.containsKey(ch_lo)) {
+                    map.put(ch_lo, map.get(ch_lo)+1);
+                }
+                else {
+                    map.put(ch_lo, 1);
+                }
+                lo++;
+            }
+        }
+
+        return map.isEmpty();
+    }
+}
+```
+
 ## Complexity
 
 - Time: O(n)
-- Space: O(1)
+- Space: O(n)
 
 ## Gotcha
 
