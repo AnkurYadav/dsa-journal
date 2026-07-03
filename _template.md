@@ -10,7 +10,7 @@
 
 ## Code
 
-```python
+```java
 def solve(...):
     ...
 ```
