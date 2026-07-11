@@ -6,10 +6,13 @@
 
 ## Approach
 
-Keep track of corresponding new nodes for each old node in a map so that lookup is not costly then create linked list add corresponding nodes in map then again iterate over the list to assign random pointers.
+1. Keep track of corresponding new nodes for each old node in a map so that lookup is not costly then create linked list add corresponding nodes in map then again iterate over the list to assign random pointers.
+2. We can existing linked list next pointers to store new copy nodes alternatevily to get constant space solution. As shown below. Then separate them to get new list.
+    originalNode1 --> newNode1 --> originalNode2 --> newNode2 --> .......... --> originalNodeN --> newNodeN --> null
 
 ## Code
 
+1. Using map to store corresponding nodes
 ```java
 /*
 // Definition for a Node.
@@ -62,10 +65,69 @@ class Solution {
 }
 ```
 
+2. Using linked list rearrangement O(1) space
+```java
+/*
+// Definition for a Node.
+class Node {
+    int val;
+    Node next;
+    Node random;
+
+    public Node(int val) {
+        this.val = val;
+        this.next = null;
+        this.random = null;
+    }
+}
+*/
+
+class Solution {
+    public Node copyRandomList(Node head) {
+        if(head == null) {
+            return head;
+        }
+
+        // copy nodes
+        Node curr = head;
+        while(curr != null) {
+            Node newNode = new Node(curr.val);
+            Node temp = curr.next;
+            curr.next = newNode;
+            newNode.next = temp;
+            curr = curr.next.next;
+        }
+
+        // assign random pointers
+        curr = head;
+        while(curr != null) {
+            if(curr.random != null) {
+                curr.next.random = curr.random.next;
+            }
+            curr = curr.next.next;
+        }
+
+        // split linked lists in two
+        curr = head;
+        Node headNew = head.next;
+        while(curr != null) {
+            Node temp = curr.next;
+            curr.next = temp.next;
+            temp.next = curr.next == null ? null : curr.next.next;
+            curr = curr.next;
+        }
+
+
+        return headNew;
+    }
+}
+```
+
 ## Complexity
 
 - Time: O(n)
-- Space: O(n)
+- Space: O(n) -> for hash map solution
+         O(1) -> for merged linked list solution
 
 ## Gotcha
 
