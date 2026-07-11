@@ -6,10 +6,12 @@
 
 ## Approach
 
-Use hash map to quickly find the key, use doubly linked list to quickly reorder the nodes according to latest access order.
+1. Use hash map to quickly find the key, use doubly linked list to quickly reorder the nodes according to latest access order.
+2. Use inbuilt LinkedHashMap with accessOrder true and overridden removeEldestEntry() to mimic LRU cache
 
 ## Code
 
+1. Custom implementation
 ```java
 class Node {
     public int key;
@@ -106,6 +108,49 @@ class LRUCache {
             }
             this.length++;
         }
+    }
+}
+
+/**
+ * Your LRUCache object will be instantiated and called as such:
+ * LRUCache obj = new LRUCache(capacity);
+ * int param_1 = obj.get(key);
+ * obj.put(key,value);
+ */
+```
+
+2. In built java LinkedHashMap
+```java
+class LRUCacheFromLInkedHashMap<K, V> extends LinkedHashMap<K, V> {
+    private final int capacity;
+
+    public LRUCacheFromLInkedHashMap(int capacity) {
+        super(capacity, 0.75f, true);
+        this.capacity = capacity;
+    }
+
+    @Override
+    protected boolean removeEldestEntry(Map.Entry<K, V> eldest) {
+        return size() > capacity;
+    }
+}
+
+class LRUCache {
+    private Map<Integer, Integer> map;
+
+    public LRUCache(int capacity) {
+        this.map = new LRUCacheFromLInkedHashMap(capacity);
+    }
+    
+    public int get(int key) {
+        if(this.map.containsKey(key)) {
+            return this.map.get(key);
+        }
+        return -1;
+    }
+    
+    public void put(int key, int value) {
+        this.map.put(key, value);
     }
 }
 
